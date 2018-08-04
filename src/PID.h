@@ -2,8 +2,14 @@
 #define PID_H
 
 class PID {
-  double prev_cte;
-  
+  bool twiddle;
+  long current_step;
+  double best_error;
+  int param_index;
+  double dp[2];
+
+  void UpdateCoefficient(int index, double value);
+
 public:
   /*
   * Errors

@@ -3,6 +3,44 @@ Self-Driving Car Engineer Nanodegree Program
 
 ---
 
+## Rubric Points
+### Describe the effect each of the P, I, D components had in your implementation.
+
+#### Effect of P component
+**Proportaional** component, `P`, causes the car to steer proportional and opposite to the car's distance from the center of the lane (aka. cross-track error `CTE`).
+
+If the coefficient is too high, the car constantly overcorrects and overshoots the center line and thus oscillates a lot. If the coefficient is too low, the car may react too slowly to curves and may go off track.
+
+When only `P` component is used, the car overshoots the center line and goes out of the road. A demo video is available at [./demo-i-only.mp4](./demo-i-only.mp4) with parameter setting:
+```
+pid.Init(0.18, 0.0, 0.0);
+```
+
+#### Effect of D component
+**Differential** component, `D`, counteracts `P` component's trend (change in CTE from one value to the next) to overshoot the centerline.
+
+If the coefficient is too high, it will lead to almost constant steering angle changes of large degrees. The car is well centered, but speed remains relatively low.
+
+If the coefficient is too high, the car oscillates a lot due to increased overshooting.
+
+When only `D` component is used, car goes off the road as CTE error is not tackled. A demo video is available at [./demo-d-only.mp4](./demo-d-only.mp4) with parameter setting:
+```
+pid.Init(0.0, 0.0, 3.125);
+```
+
+#### Effect of I component
+**Integral** component, `I`, tries to eliminate system bias that prevents the P-D controller from reaching the center line. This bias may take several forms, such as a steering drift (as mentioned in the Control unit lessons). The simulator is supposed to be bias free, thus `0.0`. However, when non-zero values is used, it helped to reduce the CTE around the curves.
+
+If only `I` component is active, it makes the car to go in circles. A demo video is available at [./demo-i-only.mp4](./demo-i-only.mp4) with parameter setting:
+```
+pid.Init(0.0, 0.0081, 0.0);
+```
+
+### Describe how the final hyperparameters were chosen.
+
+The parameters were chosen manually by try and error. 
+
+
 ## Dependencies
 
 * cmake >= 3.5

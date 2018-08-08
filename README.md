@@ -38,8 +38,7 @@ pid.Init(0.0, 0.0081, 0.0);
 
 ### Describe how the final hyperparameters were chosen.
 
-The parameters were chosen manually by try and error. 
-
+The parameters were chosen manually by trial and error. The intial value was chosen as `Kp: 0.2, Ki: 0.004, Kd: 3.0` (from the lecture content). Then they were increased and decreased while observing mainly 2 things: how it behaves in curves and whether the car moves at reasonable speed (40~50 mph). Final values are chosen as `Kp: 0.18, Ki: 0.0081, Kd: 3.125`.
 
 ## Dependencies
 
